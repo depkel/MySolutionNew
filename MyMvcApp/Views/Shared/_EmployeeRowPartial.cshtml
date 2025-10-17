@@ -1,0 +1,13 @@
+@model MyMvcApp.Models.Employee
+
+<tr data-id="@Model.Id">
+    <td>@Model.Id</td>
+    <td>@Model.Name</td>
+    <td>@Model.Department</td>
+    <td>@Model.Email</td>
+    <td>
+        <button class="btn btn-sm btn-primary edit-btn" data-id="@Model.Id">Edit</button>
+        <button class="btn btn-sm btn-danger delete-btn" data-id="@Model.Id">Delete</button>
+    </td>
+</tr>
+

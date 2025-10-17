@@ -1,0 +1,51 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Start LandingPage + MyMvcApp",
+      "configurations": [ "Launch MyLandingPage", "Launch MyMvcApp" ]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Launch MyLandingPage",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build MyLandingPage",
+      "program": "${workspaceFolder}/MyLandingPage/bin/Debug/net8.0/MyLandingPage.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/MyLandingPage",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/MyLandingPage/Views"
+      }
+    },
+    {
+      "name": "Launch MyMvcApp",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build MyMvcApp",
+      "program": "${workspaceFolder}/MyMvcApp/bin/Debug/net8.0/MyMvcApp.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/MyMvcApp",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/MyMvcApp/Views"
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+@model MyMvcApp.Models.Employee
+
+<div>
+    <p>Are you sure you want to delete <strong>@Model.Name</strong> from <strong>@Model.Department</strong>?</p>
+
+    <div class="text-end">
+        <button id="confirmDeleteBtn" class="btn btn-danger" data-id="@Model.Id">Yes, Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</div>
+
+<script>
+document.getElementById("confirmDeleteBtn").addEventListener("click", function () {
+   debugger;
+
+    const id = this.getAttribute("data-id");
+    alert(id);
+    fetch(`/Home/ConfirmDelete?id=${id}`, { method: "POST" })
+        .then(res => {
+            if (!res.ok) throw new Error("Failed to delete");
+            const row = document.querySelector(`tr[data-id='${id}']`);
+            if (row) row.remove();
+            bootstrap.Modal.getInstance(document.getElementById("employeeModal")).hide();
+        })
+        .catch(err => alert(err.message));
+});
+</script>

@@ -1,0 +1,41 @@
+@model MyMvcApp.Models.Employee
+
+<form id="editEmployeeForm">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" name="Name" class="form-control" value="@Model.Name" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Department</label>
+        <input type="text" name="Department" class="form-control" value="@Model.Department" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="Email" class="form-control" value="@Model.Email" required />
+    </div>
+
+    <div class="text-end">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>
+
+<script>
+document.getElementById("editEmployeeForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    fetch("/Home/UpdateEmployee", { method: "POST", body: formData })
+        .then(r => { if (!r.ok) throw new Error("Save failed"); return r.text(); })
+        .then(html => {
+            const id = formData.get("Id");
+            const row = document.querySelector(`tr[data-id='${id}']`);
+            if (row) row.outerHTML = html;
+            bootstrap.Modal.getInstance(document.getElementById("employeeModal")).hide();
+        })
+        .catch(err => alert(err.message));
+});
+</script>
